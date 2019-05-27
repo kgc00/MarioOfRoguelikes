@@ -301,6 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bcc0f9840987e4408ee7c87fabce1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: -6585715443682291762, guid: 40be3018f5d22a749834a36353d35935,
+    type: 3}
   tileViewPrefab: {fileID: 7060274800766113782, guid: 26faf4b876d61224c80dee643987e979,
     type: 3}
   tileSelectionIndicatorPrefab: {fileID: 137804177371799968, guid: eb7b1df601c8f8447b837535d25d4638,

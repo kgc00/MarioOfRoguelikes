@@ -16,6 +16,8 @@
              current.Grow ();
          if (GUILayout.Button ("Shrink"))
              current.Shrink ();
+         if (GUILayout.Button ("Create Monster"))
+             current.CreateMonster ();
          if (GUILayout.Button ("Grow Area"))
              current.GrowArea ();
          if (GUILayout.Button ("Shrink Area"))
