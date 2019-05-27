@@ -1,45 +1,86 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-[CustomEditor(typeof(BoardCreator))]
-public class BoardCreatorInspector : Editor
-{
+[CustomEditor (typeof (BoardCreator))]
+public class BoardCreatorInspector : Editor {
 
-    string[] unitNames;
+    string[] unitTypeNames;
     int spawnUnitIndex = 0;
 
-    public BoardCreator Current
-    {
-        get
-        {
-            return (BoardCreator)target;
+    string[] tileTypeNames;
+    int spawnTileIndex = 0;
+
+    public BoardCreator Current {
+        get {
+            return (BoardCreator) target;
         }
     }
 
-    public override void OnInspectorGUI()
-    {
-        unitNames = getUnitNames();
-
-        GUILayout.BeginHorizontal("box");
-        GUILayout.Label("Spawn");
-        spawnUnitIndex = EditorGUILayout.Popup(spawnUnitIndex, unitNames);
-        GUILayout.EndHorizontal();
-
-
-        if (GUILayout.Button("RefreshUnits"))
-            Current.RefreshUnits();
-
+    private void OnEnable () {
+        Current.RefreshUnitTypes ();
+        Current.RefreshTileTypes ();
     }
 
-    private string[] getUnitNames()
-    {
-        List<string> names = new List<string>();
-        foreach (UnitType unit in Current.Units)
-        {
-            names.Add(unit.Name);
+    public override void OnInspectorGUI () {
+        unitTypeNames = getUnitNames ();
+        tileTypeNames = getTileNames ();
+
+        DrawDefaultInspector ();
+
+        GUILayout.BeginHorizontal ("box");
+        GUILayout.Label ("Spawn");
+        spawnTileIndex = EditorGUILayout.Popup (spawnTileIndex, tileTypeNames);
+        Current.UpdateSelectedTileType (spawnTileIndex);
+        GUILayout.EndHorizontal ();
+
+        GUILayout.BeginHorizontal ("box");
+        GUILayout.Label ("Spawn");
+        spawnUnitIndex = EditorGUILayout.Popup (spawnUnitIndex, unitTypeNames);
+        Current.UpdateSelectedUnitType (spawnUnitIndex);
+        GUILayout.EndHorizontal ();
+
+        if (GUILayout.Button ("Refresh")) {
+            Current.RefreshUnitTypes ();
+            Current.RefreshTileTypes ();
         }
-        return names.ToArray();
+        if (GUILayout.Button ("Fill Board")) {
+            Current.FillBoard ();
+        }
+        if (GUILayout.Button ("Clear Board")) {
+            Current.ClearBoard ();
+        }
+        if (GUILayout.Button ("Delete Tile")) {
+            Current.DeleteTileAt (Current.MarkerPosition);
+        }
+        if (GUILayout.Button ("Place Unit")) {
+            Current.PlaceSelectedUnit (Current.MarkerPosition);
+        }
+        if (GUILayout.Button ("Delete Unit")) {
+            Current.DeleteUnitAt (Current.MarkerPosition);
+        }
+        if (GUILayout.Button ("Save")) {
+            Current.Save ();
+        }
+        if (GUILayout.Button ("Load")) {
+            Current.Load ();
+        }
+    }
+
+    private string[] getUnitNames () {
+        List<string> names = new List<string> ();
+        foreach (UnitType unitType in Current.UnitTypes) {
+            names.Add (unitType.ToString ());
+        }
+        return names.ToArray ();
+    }
+
+    private string[] getTileNames () {
+        List<string> names = new List<string> ();
+        foreach (TileType tileType in Current.TileTypes) {
+            names.Add (tileType.ToString ());
+        }
+        return names.ToArray ();
     }
 }

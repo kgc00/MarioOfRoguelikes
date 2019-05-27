@@ -172,8 +172,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189259329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 4, y: 4.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -232,6 +232,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0a2628b81e27e4c8f5d5c68093fa67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileViewPrefab: {fileID: 5270496987601561066, guid: 0c50922f600c981489e7dc1f991b6193,
+    type: 3}
+  unitViewPrefab: {fileID: 1642375766285681938, guid: f40035b8fc6b4674abdb9b5b023b05d4,
+    type: 3}
+  tileSelectionIndicatorPrefab: {fileID: 137804177371799968, guid: eb7b1df601c8f8447b837535d25d4638,
+    type: 3}
+  UnitTypes:
+  - {fileID: 11400000, guid: 423ce70f25b529c47bc6708e7c8de3cd, type: 2}
+  - {fileID: 11400000, guid: 1df566011ccfd3941b738a1c6f244ce2, type: 2}
+  - {fileID: 11400000, guid: 8ec57f8a298b6914b9e638e8b8c4a819, type: 2}
+  TileTypes:
+  - {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+  - {fileID: 11400000, guid: 54b1438f405e7a9418550ff03d6c0d5d, type: 2}
+  width: 10
+  depth: 10
+  levelData: {fileID: 11400000, guid: f9b953ddbc4ad334dbd9e3da57a08243, type: 2}
 --- !u!4 &265394844
 Transform:
   m_ObjectHideFlags: 0
@@ -240,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265394842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.6378126, y: 3.0781431, z: -4.3968344}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
