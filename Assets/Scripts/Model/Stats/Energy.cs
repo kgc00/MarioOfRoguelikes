@@ -8,19 +8,20 @@ public class Energy : Stat
         {
             return Mathf.Floor(Current / BarSize);
         }
-        set
-        {
-            Current = value * BarSize;
-        }
     }
     public float Rate { get; protected set; }
     public float BarSize { get; protected set; }
 
+    public void Spend(float bars)
+    {
+        ChangeAmount(-bars * BarSize);
+    }
+
     public Energy()
     {
-        Current = 30;
+        current = 30f;
         Max = 30;
-        Rate = 5f;
+        Rate = 10f;
         BarSize = 10;
     }
 
@@ -31,7 +32,7 @@ public class Energy : Stat
 
     private void regenerate()
     {
-        Current += Rate * Time.deltaTime;
+        ChangeAmount(Rate * Time.deltaTime);
     }
 
 

@@ -4,4 +4,5 @@ using UnityEngine;
 public class TileType : ScriptableObject
 {
     public Sprite Image;
+    public bool IsWalkable;
 }

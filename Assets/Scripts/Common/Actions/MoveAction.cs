@@ -15,10 +15,11 @@ public class MoveAction : Action
 
         // Check if there is actually a tile
         Tile tile = Actor.TheBoard.TileAt(pos);
-        if (tile == null)
+        if (tile == null || !tile.Type.IsWalkable)
         {
             return new Failure();
         }
+
 
         // Check if there is another unit
         Unit target = Actor.TheBoard.UnitAt(pos);

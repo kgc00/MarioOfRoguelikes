@@ -96,11 +96,11 @@ MonoBehaviour:
   - location:
       x: 2
       y: 0
-    tileType: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+    tileType: {fileID: 11400000, guid: 54b1438f405e7a9418550ff03d6c0d5d, type: 2}
   - location:
       x: 2
       y: 1
-    tileType: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+    tileType: {fileID: 11400000, guid: 54b1438f405e7a9418550ff03d6c0d5d, type: 2}
   - location:
       x: 2
       y: 2
@@ -108,7 +108,7 @@ MonoBehaviour:
   - location:
       x: 2
       y: 3
-    tileType: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+    tileType: {fileID: 11400000, guid: 54b1438f405e7a9418550ff03d6c0d5d, type: 2}
   - location:
       x: 2
       y: 4
@@ -419,6 +419,6 @@ MonoBehaviour:
       y: 0
     unitType: {fileID: 11400000, guid: 423ce70f25b529c47bc6708e7c8de3cd, type: 2}
   - location:
-      x: 3
-      y: 3
+      x: 4
+      y: 2
     unitType: {fileID: 11400000, guid: 1df566011ccfd3941b738a1c6f244ce2, type: 2}

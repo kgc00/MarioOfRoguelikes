@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Ground
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 71c2df575b6c68447b31a7d4f7831403, type: 3}
+  IsWalkable: 1

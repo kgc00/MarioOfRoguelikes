@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NotTile
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 62b0d5467b079794ea81b508658ab7d3, type: 3}
+  IsWalkable: 0
