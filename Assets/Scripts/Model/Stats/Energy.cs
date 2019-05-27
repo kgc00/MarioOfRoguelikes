@@ -22,7 +22,7 @@ public class Energy : Stat
         current = 30f;
         Max = 30;
         Rate = 10f;
-        BarSize = 10;
+        BarSize = 1;
     }
 
     public override void Tick()

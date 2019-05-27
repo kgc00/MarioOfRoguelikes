@@ -2,29 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (SpriteRenderer))]
-public class UnitBehaviour : MonoBehaviour {
-    private Unit unit;
+[RequireComponent(typeof(SpriteRenderer))]
+[System.Serializable]
+public class UnitBehaviour : MonoBehaviour
+{
     private SpriteRenderer spriteRenderer;
 
-    private void Awake () {
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start () {
-        RefreshSprite ();
+    public void UpdatePosition(Vector2Int position)
+    {
+        transform.position = new Vector3(position.x, position.y, -1);
     }
 
-    void Update () {
-        unit.Tick ();
-        transform.position = new Vector3 (unit.Position.x, unit.Position.y, -1);
+    public void UpdateSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
     }
 
-    public void SetUnit (Unit u) {
-        unit = u;
-    }
-
-    public void RefreshSprite () {
-        spriteRenderer.sprite = unit.Type.Image;
-    }
 }

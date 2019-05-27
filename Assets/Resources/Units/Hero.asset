@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Hero
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 6d2bd08acb19e434e9cc18cd8ef5e366, type: 3}
-  Breed: 0
+  AI: 0
+  Prefab: {fileID: 0}

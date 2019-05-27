@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class DebugAction : Action
 {
-    public DebugAction(Unit actor) : base(actor)
+    public DebugAction()
     {
         Cost = 1;
     }
 
-    public override ActionResult Perform()
+    public override ActionResult Perform(Unit actor)
     {
         Debug.Log("Debug Action performed.");
         return new Success();

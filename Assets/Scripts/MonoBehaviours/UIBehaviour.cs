@@ -20,7 +20,7 @@ public class UIBehaviour : MonoBehaviour
     private void OnStatChange(StatChange notification)
     {
 
-        if (notification.Actor is Hero)
+        if (notification.Actor.AI.IsHero())
         {
             if (notification.Type == typeof(Energy))
             {

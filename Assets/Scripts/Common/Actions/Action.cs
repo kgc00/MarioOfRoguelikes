@@ -1,13 +1,12 @@
 public abstract class Action
 {
-    public Action(Unit actor)
+    public Action()
     {
-        Actor = actor;
         Cost = 0;
     }
     public Unit Actor { get; private set; }
     public float Cost { get; protected set; }
-    public abstract ActionResult Perform();
+    public abstract ActionResult Perform(Unit actor);
 }
 
 public abstract class ActionResult

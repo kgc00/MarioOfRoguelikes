@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class MoveAttack : Action {
+public class MoveAttack : Action
+{
     public Unit Target { get; private set; }
-    public MoveAttack (Unit actor, Unit target) : base (actor) {
+    public MoveAttack(Unit target)
+    {
         Cost = 1;
         Target = target;
     }
 
-    public override ActionResult Perform () {
-        Actor.TheBoard.DeleteUnitAt (Target.Position);
-        Actor.TheBoard.Move (Actor, Target.Position);
-        return new Success ();
+    public override ActionResult Perform(Unit actor)
+    {
+        actor.Board.DeleteUnitAt(Target.Position);
+        actor.Board.Move(actor, Target.Position);
+        return new Success();
     }
 
 }
