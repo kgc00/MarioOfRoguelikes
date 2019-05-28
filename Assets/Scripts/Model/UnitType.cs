@@ -13,8 +13,6 @@ public class UnitType : ScriptableObject
     public enum AIs
     {
         HERO,
-        MONSTER,
-        PATTERN,
-        CHASE
+        PATTERN
     }
 }

@@ -16,18 +16,11 @@ public static class BoardHelper
         {
             ai = new HeroAI();
         }
-        else if (type.AI == UnitType.AIs.MONSTER)
-        {
-            ai = new MonsterAI();
-        }
         else if (type.AI == UnitType.AIs.PATTERN)
         {
             ai = new PatternAI(type.PatternAIData);
         }
-        else if (type.AI == UnitType.AIs.CHASE)
-        {
-            ai = new ChaseAI(board);
-        }
+
 
         Unit unit = new Unit(board, unitBehaviour, type, ai, pos);
 
