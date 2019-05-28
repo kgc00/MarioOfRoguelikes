@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Monster2
   m_EditorClassIdentifier: 
   Image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Breed: 1
+  AI: 0
+  PatternAIData:
+    Pattern: {fileID: 11400000, guid: 4559bffa862f39c478dac7d86fa56122, type: 2}
+  Prefab: {fileID: 1642375766285681938, guid: f40035b8fc6b4674abdb9b5b023b05d4, type: 3}
