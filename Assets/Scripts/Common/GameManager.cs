@@ -7,12 +7,12 @@ public class GameManager : MonoBehaviour {
     public int currentLevelIndex;
 
     private void Awake () {
-        if (Instance != null) {
-            Instance = this;
+        if (Instance != this && Instance != null) {
+            Destroy (gameObject);
         } else {
-            Destroy (this);
+            Instance = this;
+            DontDestroyOnLoad (gameObject);
         }
-        DontDestroyOnLoad (gameObject);
     }
 
     public void Reload () {

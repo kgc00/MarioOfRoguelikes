@@ -10,10 +10,7 @@ class EnergyFillTrigger : BaseTrigger {
     }
 
     public void OnEnter (Unit unit, Tile tile) {
-        UnityEngine.Debug.Log ("entering");
         unit.energy.Add (refillAmount);
     }
-    public void OnLeave (Unit unit, Tile tile) {
-        UnityEngine.Debug.Log ("leaving");
-    }
+    public void OnLeave (Unit unit, Tile tile) { }
 }

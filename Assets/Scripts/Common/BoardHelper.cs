@@ -35,6 +35,8 @@ public static class BoardHelper {
         BaseTrigger trigger = null;
         if (type.TriggerType == TileType.TriggerTypes.ENERGY_REFILL) {
             trigger = new EnergyFillTrigger (type.energyRefillTriggerData);
+        } else if (type.TriggerType == TileType.TriggerTypes.GOAL) {
+            trigger = new GoalTrigger ();
         }
 
         Tile tile = new Tile (tileBehaviour, pos, type, trigger);
