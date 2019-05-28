@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f86db44032c014aaa4b58093d8d3a6, type: 3}
   m_Name: Monster2
   m_EditorClassIdentifier: 
-  Image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  AI: 0
+  Image: {fileID: 21300000, guid: 31547caccf3fcbe4296a3661c2ec722b, type: 3}
+  AI: 1
   PatternAIData:
-    Pattern: {fileID: 11400000, guid: 4559bffa862f39c478dac7d86fa56122, type: 2}
+    Pattern: {fileID: 0}
   Prefab: {fileID: 1642375766285681938, guid: f40035b8fc6b4674abdb9b5b023b05d4, type: 3}

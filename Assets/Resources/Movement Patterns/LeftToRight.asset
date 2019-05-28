@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc7c34e51b780a4ea4bdb34cd3ff3d6, type: 3}
   m_Name: LeftToRight
   m_EditorClassIdentifier: 
-  pattern: []
+  pattern:
+  - x: 1
+    y: 0
+  - x: -1
+    y: 0
+  - x: -1
+    y: 0
+  - x: 1
+    y: 0

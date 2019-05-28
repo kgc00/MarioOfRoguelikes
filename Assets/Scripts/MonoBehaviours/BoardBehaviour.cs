@@ -2,30 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardBehaviour : MonoBehaviour
-{
+public class BoardBehaviour : MonoBehaviour {
 
     private Board board;
     public LevelData levelData;
 
-    [SerializeField] private TileBehaviour tilePrefab;
-    public TileBehaviour TilePrefab
-    {
-        get
-        {
-            return tilePrefab;
-        }
-    }
-
-    private void Awake()
-    {
-        board = new Board();
+    private void Awake () {
+        board = new Board ();
         board.Container = this;
-        board.Load();
+        board.Load ();
     }
 
-    private void Update()
-    {
-        board.Tick();
+    private void Update () {
+        board.Tick ();
     }
 }
