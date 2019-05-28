@@ -1,7 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "New Unit", menuName = "OurGame/Unit")]
-public class UnitType : ScriptableObject {
+[CreateAssetMenu(fileName = "New Unit", menuName = "OurGame/Unit")]
+public class UnitType : ScriptableObject
+{
     public Sprite Image;
     public AIs AI;
 
@@ -9,9 +10,11 @@ public class UnitType : ScriptableObject {
 
     public UnitBehaviour Prefab;
 
-    public enum AIs {
+    public enum AIs
+    {
         HERO,
         MONSTER,
-        PATTERN
+        PATTERN,
+        CHASE
     }
 }
