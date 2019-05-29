@@ -4,131 +4,190 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class BoardCreator : MonoBehaviour {
-    [SerializeField] GameObject tileViewPrefab;
+public class BoardCreator : MonoBehaviour
+{
+    [SerializeField] TileBehaviour tileViewPrefab;
+    [SerializeField] UnitBehaviour unitViewPrefab;
     [SerializeField] GameObject tileSelectionIndicatorPrefab;
-    Transform marker {
-        get {
-            if (_marker == null) {
-                GameObject instance = Instantiate (tileSelectionIndicatorPrefab) as GameObject;
-                _marker = instance.transform;
-            }
-            return _marker;
-        }
-    }
-    Transform _marker;
-    Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile> ();
+    public Vector2Int MarkerPosition { get; private set; }
+    Transform marker;
+    EditorInputHandler inputHandler;
+    [HideInInspector] public List<UnitType> UnitTypes = new List<UnitType>();
+    [HideInInspector] public List<TileType> TileTypes = new List<TileType>();
+    public int SelectedTileTypeIndex { get; private set; }
+    public int SelectedUnitTypeIndex { get; private set; }
+
     [SerializeField] int width = 10; // world space x
     [SerializeField] int depth = 10; // world space y
-    [SerializeField] int height = 8; // world space z
-    [SerializeField] Point pos;
+
     [SerializeField] LevelData levelData;
-    public void GrowArea () {
-        Rect r = RandomRect ();
-        GrowRect (r);
+    private Dictionary<Vector2Int, Tile> tiles = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Unit> units = new Dictionary<Vector2Int, Unit>();
+
+    private void Awake()
+    {
+        GameObject instance = Instantiate(
+            tileSelectionIndicatorPrefab, transform
+        ) as GameObject;
+        marker = instance.transform;
+        inputHandler = gameObject.AddComponent<EditorInputHandler>();
+        inputHandler.Initialize(this);
     }
-    public void ShrinkArea () {
-        Rect r = RandomRect ();
-        ShrinkRect (r);
-    }
-    Rect RandomRect () {
-        int x = UnityEngine.Random.Range (0, width);
-        int y = UnityEngine.Random.Range (0, depth);
-        int w = UnityEngine.Random.Range (1, width - x + 1);
-        int h = UnityEngine.Random.Range (1, depth - y + 1);
-        return new Rect (x, y, w, h);
-    }
-    void GrowRect (Rect rect) {
-        for (int y = (int) rect.yMin; y < (int) rect.yMax; ++y) {
-            for (int x = (int) rect.xMin; x < (int) rect.xMax; ++x) {
-                Point p = new Point (x, y);
-                GrowSingle (p);
+
+    public void FillBoard()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < depth; j++)
+            {
+                PlaceSelectedTile(new Vector2Int(i, j));
             }
         }
     }
-    void ShrinkRect (Rect rect) {
-        for (int y = (int) rect.yMin; y < (int) rect.yMax; ++y) {
-            for (int x = (int) rect.xMin; x < (int) rect.xMax; ++x) {
-                Point p = new Point (x, y);
-                ShrinkSingle (p);
-            }
+
+    public void ClearBoard()
+    {
+        List<Vector2Int> tilePositions = new List<Vector2Int>(tiles.Keys);
+        foreach (Vector2Int pos in tilePositions)
+        {
+            DeleteTileAt(pos);
+        }
+
+        List<Vector2Int> unitPositions = new List<Vector2Int>(units.Keys);
+        foreach (Vector2Int pos in unitPositions)
+        {
+            DeleteUnitAt(pos);
         }
     }
-    Tile Create () {
-        GameObject instance = Instantiate (tileViewPrefab) as GameObject;
-        instance.transform.parent = transform;
-        return instance.GetComponent<Tile> ();
+
+    public void PlaceSelectedTile(Vector2Int p)
+    {
+        TileType tileType = TileTypes[SelectedTileTypeIndex];
+        PlaceTile(p, tileType);
     }
-    Tile GetOrCreate (Point p) {
-        if (tiles.ContainsKey (p))
-            return tiles[p];
 
-        Tile t = Create ();
-        t.Load (p, 0);
-        tiles.Add (p, t);
+    public void PlaceTile(Vector2Int p, TileType tileType)
+    {
+        if (tiles.ContainsKey(p))
+            DeleteTileAt(p);
 
-        return t;
-    }
-    void GrowSingle (Point p) {
-        Tile t = GetOrCreate (p);
-        // if (t.height < height)
-        // t.Grow ();
-    }
-    void ShrinkSingle (Point p) {
-        if (!tiles.ContainsKey (p))
-            return;
+        Tile tile = BoardHelper.CreateTile(
+            transform, tileViewPrefab, p, tileType
+        );
 
-        Tile t = tiles[p];
-
-        tiles.Remove (p);
-        DestroyImmediate (t.gameObject);
+        // Put tile in the dictionary
+        tiles.Add(tile.Position, tile);
 
     }
-    public void Grow () {
-        GrowSingle (pos);
+
+    public void PlaceSelectedUnit(Vector2Int p)
+    {
+        UnitType unitType = UnitTypes[SelectedUnitTypeIndex];
+
+        PlaceUnit(p, unitType);
     }
-    public void Shrink () {
-        ShrinkSingle (pos);
+
+    public void PlaceUnit(Vector2Int p, UnitType unitType)
+    {
+        if (units.ContainsKey(p))
+            DeleteUnitAt(p);
+
+        Unit unit = BoardHelper.CreateUnit(transform, null, p, unitType);
+
+        units.Add(unit.Position, unit);
     }
-    public void UpdateMarker () {
-        Tile t = tiles.ContainsKey (pos) ? tiles[pos] : null;
-        marker.localPosition = t != null ? t.center : new Vector3 (pos.x, 0, pos.y);
+    public void DeleteUnitAt(Vector2Int p)
+    {
+        BoardHelper.DeleteUnitAt(p, ref units);
     }
-    public void Clear () {
-        for (int i = transform.childCount - 1; i >= 0; --i)
-            DestroyImmediate (transform.GetChild (i).gameObject);
-        tiles.Clear ();
+
+    public void DeleteTileAt(Vector2Int p)
+    {
+        BoardHelper.DeleteTileAt(p, ref tiles);
     }
-    public void Save () {
+
+    public void RefreshUnitTypes()
+    {
+        UnitTypes.Clear();
+        Object[] tmp = Resources.LoadAll("Units", typeof(UnitType));
+        for (int i = 0; i < tmp.Length; ++i)
+        {
+            UnitTypes.Add((UnitType)tmp[i]);
+        }
+    }
+
+    public void RefreshTileTypes()
+    {
+        TileTypes.Clear();
+        Object[] tmp = Resources.LoadAll("Tiles", typeof(TileType));
+        for (int i = 0; i < tmp.Length; ++i)
+        {
+            TileTypes.Add((TileType)tmp[i]);
+        }
+    }
+
+    public void MoveAndUpdateMarker(Vector2Int direction)
+    {
+        MarkerPosition += direction;
+        marker.position = new Vector3(MarkerPosition.x, MarkerPosition.y, -2);
+    }
+
+    public void UpdateSelectedTileType(int index)
+    {
+        SelectedTileTypeIndex = index;
+    }
+    public void UpdateSelectedUnitType(int index)
+    {
+        SelectedUnitTypeIndex = index;
+    }
+
+    public void Save()
+    {
         string filePath = Application.dataPath + "/Resources/Levels";
-        if (!Directory.Exists (filePath))
-            CreateSaveDirectory ();
+        if (!Directory.Exists(filePath))
+            CreateSaveDirectory();
 
-        LevelData board = ScriptableObject.CreateInstance<LevelData> ();
-        board.tiles = new List<Vector3> (tiles.Count);
-        foreach (Tile t in tiles.Values)
-            board.tiles.Add (new Vector3 (t.pos.x, t.height, t.pos.y));
+        LevelData board = ScriptableObject.CreateInstance<LevelData>();
 
-        string fileName = string.Format ("Assets/Resources/Levels/{1}.asset", filePath, name);
-        AssetDatabase.CreateAsset (board, fileName);
+        board.tiles = new List<TileSpawnData>();
+        foreach (
+            KeyValuePair<Vector2Int, Tile> element in tiles)
+            board.tiles.Add(new TileSpawnData(element.Key, element.Value.Type));
+
+        board.units = new List<UnitSpawnData>();
+        foreach (KeyValuePair<Vector2Int, Unit> element in units)
+            board.units.Add(new UnitSpawnData(
+                element.Key, element.Value.Type));
+
+        string fileName = string.Format(
+            "Assets/Resources/Levels/{1}.asset",
+            filePath, name);
+        AssetDatabase.CreateAsset(board, fileName);
     }
-    void CreateSaveDirectory () {
+    void CreateSaveDirectory()
+    {
         string filePath = Application.dataPath + "/Resources";
-        if (!Directory.Exists (filePath))
-            AssetDatabase.CreateFolder ("Assets", "Resources");
+        if (!Directory.Exists(filePath))
+            AssetDatabase.CreateFolder("Assets", "Resources");
         filePath += "/Levels";
-        if (!Directory.Exists (filePath))
-            AssetDatabase.CreateFolder ("Assets/Resources", "Levels");
-        AssetDatabase.Refresh ();
+        if (!Directory.Exists(filePath))
+            AssetDatabase.CreateFolder("Assets/Resources", "Levels");
+        AssetDatabase.Refresh();
     }
-    public void Load () {
-        Clear ();
+    public void Load()
+    {
+        ClearBoard();
         if (levelData == null)
             return;
-        foreach (Vector3 v in levelData.tiles) {
-            Tile t = Create ();
-            t.Load (v);
-            tiles.Add (t.pos, t);
+
+        foreach (TileSpawnData data in levelData.tiles)
+        {
+            PlaceTile(data.location, data.tileType);
+        }
+
+        foreach (UnitSpawnData data in levelData.units)
+        {
+            PlaceUnit(data.location, data.unitType);
         }
     }
 }
