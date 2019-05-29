@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4c91ce72a508b44b357df30f13ed4b, type: 3}
   m_Name: EnergyFillTile
   m_EditorClassIdentifier: 
-  Image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Image: {fileID: 21300000, guid: d48d3376eea0c2a4d9bd5287091691c1, type: 3}
   IsWalkable: 1
   TriggerType: 1
   energyRefillTriggerData:

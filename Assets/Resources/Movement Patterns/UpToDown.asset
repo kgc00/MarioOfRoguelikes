@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4c91ce72a508b44b357df30f13ed4b, type: 3}
-  m_Name: NotTile
+  m_Script: {fileID: 11500000, guid: 3fc7c34e51b780a4ea4bdb34cd3ff3d6, type: 3}
+  m_Name: UpToDown
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 62b0d5467b079794ea81b508658ab7d3, type: 3}
-  IsWalkable: 0
+  pattern:
+  - x: 0
+    y: 1
+  - x: 0
+    y: -1
+  - x: 0
+    y: -1
+  - x: 0
+    y: 1

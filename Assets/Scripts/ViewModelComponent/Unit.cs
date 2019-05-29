@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class Unit {
@@ -60,4 +61,11 @@ public class Unit {
     }
 
     protected virtual Action TakeTurn () { return null; }
+
+    public virtual void OnDeath (Vector2Int p, ref Dictionary<Vector2Int, Unit> units) {
+        if (AI.IsHero ())
+            GameManager.Instance.Reload ();
+
+        BoardHelper.FinishDeletion (p, ref units);
+    }
 }
