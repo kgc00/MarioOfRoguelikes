@@ -24,6 +24,13 @@ public class Energy : Stat {
         BarSize = 10;
     }
 
+    public Energy (EnergyValues initialValues) {
+        current = initialValues.current;
+        Max = initialValues.max;
+        Rate = initialValues.rate;
+        BarSize = initialValues.barSize;
+    }
+
     public override void Tick () {
         regenerate ();
     }

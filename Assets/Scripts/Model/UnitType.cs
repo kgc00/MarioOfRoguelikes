@@ -10,6 +10,8 @@ public class UnitType : ScriptableObject
 
     public UnitBehaviour Prefab;
 
+    public EnergyValues energyInitializer;
+
     public enum AIs
     {
         HERO,

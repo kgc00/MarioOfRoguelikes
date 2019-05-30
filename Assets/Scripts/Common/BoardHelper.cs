@@ -48,13 +48,9 @@ public static class BoardHelper {
     static public void DeleteUnitAt (
         Vector2Int p, ref Dictionary<Vector2Int, Unit> units) {
         if (units.ContainsKey (p)) {
-            units[p].OnDeath (p, ref units);
+            units[p].OnDeath ();
+            units.Remove (p);
         }
-    }
-
-    static public void FinishDeletion (Vector2Int p, ref Dictionary<Vector2Int, Unit> units) {
-        Object.Destroy (units[p].Behaviour.gameObject);
-        units.Remove (p);
     }
 
     static public void DeleteTileAt (

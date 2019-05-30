@@ -18,7 +18,9 @@ public class Unit {
         AI = ai;
 
         // TODO: refactor into Stats system
-        energy = new Energy ();
+        energy = type.energyInitializer != null   
+            ? new Energy (type.energyInitializer) 
+            : new Energy();
     }
 
     public void Tick () {
@@ -62,10 +64,10 @@ public class Unit {
 
     protected virtual Action TakeTurn () { return null; }
 
-    public virtual void OnDeath (Vector2Int p, ref Dictionary<Vector2Int, Unit> units) {
+    public virtual void OnDeath () {
         if (AI.IsHero ())
             GameManager.Instance.Reload ();
 
-        BoardHelper.FinishDeletion (p, ref units);
+        Object.Destroy(this.Behaviour.gameObject);
     }
 }
