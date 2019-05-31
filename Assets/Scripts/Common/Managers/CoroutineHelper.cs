@@ -33,6 +33,9 @@ public class CoroutineHelper : MonoBehaviour
         float countdown = initial;
         while (countdown > 0)
         {
+            // countdown -= time.deltatime
+            // yield return null
+
             yield return new WaitForSeconds(precision);
             countdown -= precision;
         }
