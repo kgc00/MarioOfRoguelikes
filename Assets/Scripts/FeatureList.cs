@@ -8,7 +8,7 @@
 // P - 4
 // K - 4
 
-// Switches and Doors
+// Switches and Doors [ done ]
 // P - 1
 // K - 1
 
@@ -16,3 +16,8 @@
 // P - 3
 // K - 3
 
+// Units that attack back
+
+// Units that take multiple hits
+
+// Different attack moves hero
