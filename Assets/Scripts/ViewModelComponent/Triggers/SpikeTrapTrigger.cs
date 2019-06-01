@@ -10,16 +10,19 @@ public class SpikeTrapTrigger : BaseTrigger
 
     Coroutine routine;
 
-    // Sprite activeSprite
-    // Sprite inactiveSprite
+    TileType spikeTile;
+    TileType groundTile;
 
     public SpikeTrapTrigger(SpikeTrapTriggerData data)
     {
         this.triggerTimer = data.TriggerTimer;
+        this.spikeTile = data.SpikeTile;
+        this.groundTile = data.GroundTile;
     }
 
     void TriggerTrap(Unit unit, Tile tile)
     {
+        tile.Board.PlaceTile(tile.Position, spikeTile);
         if (unit.Position == tile.Position)
         {
             unit.Board.DeleteUnitAt(unit.Position);
@@ -35,6 +38,7 @@ public class SpikeTrapTrigger : BaseTrigger
 
     public void OnLeave(Unit unit, Tile tile)
     {
+        tile.Board.PlaceTile(tile.Position, groundTile);
         CoroutineHelper.Instance.Stop(routine);
         routine = null;
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4c91ce72a508b44b357df30f13ed4b, type: 3}
   m_Name: Switch
   m_EditorClassIdentifier: 
-  Image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Image: {fileID: 21300000, guid: b0a4cb2effab9424598010c7f855608f, type: 3}
   IsWalkable: 1
   TriggerType: 4
   energyRefillTriggerData:
@@ -21,6 +21,8 @@ MonoBehaviour:
     RefillAmount: 0
   spikeTrapTriggerData:
     TriggerTimer: 0
+    GroundTile: {fileID: 0}
+    SpikeTile: {fileID: 0}
   switchTriggerData:
     Closed: {fileID: 11400000, guid: 31d68ce6e5493b943b3bf7ae5f7adf2b, type: 2}
     Open: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
