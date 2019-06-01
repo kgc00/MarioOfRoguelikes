@@ -2,11 +2,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class PatternAI : BaseMonsterAI, BaseAI
+public class ProjectileAI : PatternAI, BaseAI
 {
     Queue<Vector2Int> pattern = new Queue<Vector2Int>();
 
-    public PatternAI(PatternAIData data)
+    public ProjectileAI(ProjectileAIData data)
     {
         for (int i = 0; i < data.Pattern.pattern.Length; i++)
         {
@@ -15,25 +15,23 @@ public class PatternAI : BaseMonsterAI, BaseAI
         NotificationCenter.AddListener<ActionResultNotification>(OnActionResultNotification);
     }
 
-    protected Action TakeTurn()
+    public override Action TakeTurn()
     {
-        if (MustWait)
-        {
-            return null;
-        }
-
-        return new MoveAction(pattern.Peek(), this);
+        base.TakeTurn();
     }
 
-    protected void OnActionResultNotification(ActionResultNotification notification)
+    private void OnActionResultNotification(ActionResultNotification notification)
     {
         if (notification.AI == this)
         {
             BaseOnActionResultNotification(notification);
-            if (notification.Result.Type == ActionResultType.SUCCESS ||
-                notification.Result.Type == ActionResultType.FAILURE)
+            if (notification.Result.Type == ActionResultType.SUCCESS)
             {
                 pattern.Enqueue(pattern.Dequeue());
+            }
+            else
+            {
+                // BoardHelper.Instance.DeleteUnitAt()
             }
         }
     }
@@ -42,5 +40,4 @@ public class PatternAI : BaseMonsterAI, BaseAI
     {
         NotificationCenter.RemoveListener<ActionResultNotification>(OnActionResultNotification);
     }
-
 }
