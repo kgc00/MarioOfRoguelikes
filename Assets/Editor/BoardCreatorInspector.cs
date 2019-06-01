@@ -63,6 +63,7 @@ public class BoardCreatorInspector : Editor
         if (GUILayout.Button("Place Tile"))
         {
             Current.PlaceSelectedTile(Current.MarkerPosition);
+            EditorWindow.GetWindow<GameView>("GameView");
         }
 
         if (GUILayout.Button("Delete Tile"))
