@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fc2f351a5152d4d835bb6f1093d903, type: 3}
   m_Name: Standard
   m_EditorClassIdentifier: 
-  current: 30
+  current: 10
   max: 30
   rate: 10
   barSize: 10
