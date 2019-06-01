@@ -11,7 +11,7 @@ public class BoardCreator : MonoBehaviour
     [SerializeField] GameObject tileSelectionIndicatorPrefab;
     public Vector2Int MarkerPosition { get; private set; }
     Transform marker;
-    EditorInputHandler inputHandler;
+    public EditorInputHandler InputHandler;
     [HideInInspector] public List<UnitType> UnitTypes = new List<UnitType>();
     [HideInInspector] public List<TileType> TileTypes = new List<TileType>();
     public int SelectedTileTypeIndex { get; private set; }
@@ -30,8 +30,8 @@ public class BoardCreator : MonoBehaviour
             tileSelectionIndicatorPrefab, transform
         ) as GameObject;
         marker = instance.transform;
-        inputHandler = gameObject.AddComponent<EditorInputHandler>();
-        inputHandler.Initialize(this);
+        InputHandler = gameObject.AddComponent<EditorInputHandler>();
+        InputHandler.Initialize(this);
     }
 
     public void FillBoard()

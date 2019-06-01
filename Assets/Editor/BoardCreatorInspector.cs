@@ -21,6 +21,21 @@ public class BoardCreatorInspector : Editor
         }
     }
 
+    // private void Start()
+    // {
+    //     Current.InputHandler.onKeyPress += HandleKeyPresses;
+    // }
+
+    // ~BoardCreatorInspector()
+    // {
+    //     Current.InputHandler.onKeyPress -= HandleKeyPresses;
+    // }
+
+    private void HandleKeyPresses()
+    {
+        Debug.Log("keycode: ");
+    }
+
     private void OnEnable()
     {
         Current.RefreshUnitTypes();

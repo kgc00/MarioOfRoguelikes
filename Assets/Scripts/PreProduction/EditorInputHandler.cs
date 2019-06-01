@@ -3,6 +3,7 @@ using UnityEngine;
 public class EditorInputHandler : MonoBehaviour
 {
     BoardCreator boardCreator;
+
     public void Initialize(BoardCreator _boardCreator)
     {
         this.boardCreator = _boardCreator;
@@ -18,6 +19,7 @@ public class EditorInputHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             boardCreator.MoveAndUpdateMarker(new Vector2Int(0, 1));
+            // onKeyPress();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
