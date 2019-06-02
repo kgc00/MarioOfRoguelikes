@@ -9,7 +9,7 @@ public class BoardCreatorInspector : Editor
 
     string[] unitTypeNames;
     int spawnUnitIndex = 0;
-
+    string fileName = "";
     string[] tileTypeNames;
     int spawnTileIndex = 0;
 
@@ -33,6 +33,11 @@ public class BoardCreatorInspector : Editor
         tileTypeNames = getTileNames();
 
         DrawDefaultInspector();
+
+        GUILayout.BeginHorizontal("box");
+        GUILayout.Label("Level Name");
+        fileName = GUILayout.TextField(fileName, 25);
+        GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal("box");
         GUILayout.Label("Spawn");
@@ -60,26 +65,26 @@ public class BoardCreatorInspector : Editor
             Current.ClearBoard();
         }
 
-        if (GUILayout.Button("Place Tile"))
+        if (GUILayout.Button("Place Tile: 'P'"))
         {
             Current.PlaceSelectedTile(Current.MarkerPosition);
-            EditorWindow.GetWindow<GameView>("GameView");
         }
 
-        if (GUILayout.Button("Delete Tile"))
+        if (GUILayout.Button("Delete Tile: 'L'"))
         {
             Current.DeleteTileAt(Current.MarkerPosition);
         }
-        if (GUILayout.Button("Place Unit"))
+        if (GUILayout.Button("Place Unit: 'O'"))
         {
             Current.PlaceSelectedUnit(Current.MarkerPosition);
         }
-        if (GUILayout.Button("Delete Unit"))
+        if (GUILayout.Button("Delete Unit: 'K'"))
         {
             Current.DeleteUnitAt(Current.MarkerPosition);
         }
         if (GUILayout.Button("Save"))
         {
+            Current.SetFileName(fileName);
             Current.Save();
         }
         if (GUILayout.Button("Load"))
