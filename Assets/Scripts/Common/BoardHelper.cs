@@ -20,6 +20,10 @@ public static class BoardHelper
         {
             ai = new PatternAI(type.PatternAIData);
         }
+        else if (type.AI == UnitType.AIs.PROJECTILE)
+        {
+            ai = new ProjectileAI();
+        }
 
         Unit unit = new Unit(board, unitBehaviour, type, ai, pos);
 
@@ -30,7 +34,7 @@ public static class BoardHelper
     }
 
     static public Tile CreateTile(
-        Transform container, Board board, TileBehaviour prefab,
+        Transform container, Board board,
         Vector2Int pos, TileType type)
     {
         // Make the two pieces
@@ -52,6 +56,10 @@ public static class BoardHelper
         else if (type.TriggerType == TileType.TriggerTypes.SWITCH)
         {
             trigger = new SwitchTrigger(type.switchTriggerData);
+        }
+        else if (type.TriggerType == TileType.TriggerTypes.ARROW_TRAP)
+        {
+            trigger = new ArrowTrapTrigger(type.arrowTrapTriggerData);
         }
 
         Tile tile = new Tile(board, tileBehaviour, pos, type, trigger);

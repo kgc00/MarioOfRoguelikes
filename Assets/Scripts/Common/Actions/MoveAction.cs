@@ -3,10 +3,12 @@ using UnityEngine;
 public class MoveAction : Action
 {
     public Vector2Int Direction { get; private set; }
-    public MoveAction(Vector2Int direction, BaseAI creator) : base(creator)
+    public bool IsProjectile { get; private set; }
+    public MoveAction(Vector2Int direction, BaseAI creator, bool isProjectile) : base(creator)
     {
         Cost = 1;
         Direction = direction;
+        IsProjectile = isProjectile;
     }
 
     public override ActionResult Perform(Unit actor)
@@ -16,7 +18,14 @@ public class MoveAction : Action
         Tile tile = actor.Board.TileAt(pos);
         if (tile == null || !tile.Type.IsWalkable)
         {
-            return failure();
+            if (IsProjectile)
+            {
+                return alternate(new DestroySelf(Creator));
+            }
+            else
+            {
+                return failure();
+            }
         }
 
         // Check if there is another unit

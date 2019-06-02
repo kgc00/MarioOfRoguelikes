@@ -21,4 +21,5 @@ class SwitchTrigger : BaseTrigger
         }
     }
     public void OnLeave(Unit unit, Tile tile) { }
+    public void StartTimer(Board board, Tile tile) { }
 }

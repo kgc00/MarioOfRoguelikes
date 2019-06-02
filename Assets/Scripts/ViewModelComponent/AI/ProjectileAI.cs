@@ -2,41 +2,40 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class ProjectileAI : PatternAI, BaseAI
+public class ProjectileAI : BaseMonsterAI, BaseAI
 {
-    Queue<Vector2Int> pattern = new Queue<Vector2Int>();
+    Vector2Int direction;
 
-    public ProjectileAI(ProjectileAIData data)
+    public ProjectileAI()
     {
-        for (int i = 0; i < data.Pattern.pattern.Length; i++)
-        {
-            pattern.Enqueue(data.Pattern.pattern[i]);
-        }
+        direction = new Vector2Int(1, 0);
         NotificationCenter.AddListener<ActionResultNotification>(OnActionResultNotification);
     }
 
-    public override Action TakeTurn()
+    public void ChangeDirection(Vector2Int direction)
     {
-        base.TakeTurn();
+        this.direction = direction;
     }
 
-    private void OnActionResultNotification(ActionResultNotification notification)
+    public Action TakeTurn()
+    {
+        if (MustWait)
+        {
+            return null;
+        }
+
+        return new MoveAction(direction, this, true);
+    }
+
+    public void OnActionResultNotification(ActionResultNotification notification)
     {
         if (notification.AI == this)
         {
             BaseOnActionResultNotification(notification);
-            if (notification.Result.Type == ActionResultType.SUCCESS)
-            {
-                pattern.Enqueue(pattern.Dequeue());
-            }
-            else
-            {
-                // BoardHelper.Instance.DeleteUnitAt()
-            }
         }
     }
 
-    ~PatternAI()
+    ~ProjectileAI()
     {
         NotificationCenter.RemoveListener<ActionResultNotification>(OnActionResultNotification);
     }

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class PatternAI : BaseMonsterAI, BaseAI
 {
-    Queue<Vector2Int> pattern = new Queue<Vector2Int>();
+    protected Queue<Vector2Int> pattern = new Queue<Vector2Int>();
 
     public PatternAI(PatternAIData data)
     {
@@ -15,17 +15,17 @@ public class PatternAI : BaseMonsterAI, BaseAI
         NotificationCenter.AddListener<ActionResultNotification>(OnActionResultNotification);
     }
 
-    protected Action TakeTurn()
+    public Action TakeTurn()
     {
         if (MustWait)
         {
             return null;
         }
 
-        return new MoveAction(pattern.Peek(), this);
+        return new MoveAction(pattern.Peek(), this, false);
     }
 
-    protected void OnActionResultNotification(ActionResultNotification notification)
+    public void OnActionResultNotification(ActionResultNotification notification)
     {
         if (notification.AI == this)
         {

@@ -72,7 +72,7 @@ public class BoardCreator : MonoBehaviour
             DeleteTileAt(p);
 
         Tile tile = BoardHelper.CreateTile(
-            transform, null, tileViewPrefab, p, tileType
+            transform, null, p, tileType
         );
 
         // Put tile in the dictionary
