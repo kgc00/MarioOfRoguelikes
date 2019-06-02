@@ -15,6 +15,7 @@ public class UnitType : ScriptableObject
     public enum AIs
     {
         HERO,
-        PATTERN
+        PATTERN,
+        PROJECTILE
     }
 }

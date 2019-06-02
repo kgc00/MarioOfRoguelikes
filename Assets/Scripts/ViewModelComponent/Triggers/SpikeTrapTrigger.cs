@@ -42,4 +42,5 @@ public class SpikeTrapTrigger : BaseTrigger
         CoroutineHelper.Instance.Stop(routine);
         routine = null;
     }
+    public void StartTimer(Board board, Tile tile) { }
 }

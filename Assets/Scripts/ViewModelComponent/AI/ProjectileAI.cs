@@ -2,17 +2,19 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class PatternAI : BaseMonsterAI, BaseAI
+public class ProjectileAI : BaseMonsterAI, BaseAI
 {
-    protected Queue<Vector2Int> pattern = new Queue<Vector2Int>();
+    Vector2Int direction;
 
-    public PatternAI(PatternAIData data)
+    public ProjectileAI()
     {
-        for (int i = 0; i < data.Pattern.pattern.Length; i++)
-        {
-            pattern.Enqueue(data.Pattern.pattern[i]);
-        }
+        direction = new Vector2Int(1, 0);
         NotificationCenter.AddListener<ActionResultNotification>(OnActionResultNotification);
+    }
+
+    public void ChangeDirection(Vector2Int direction)
+    {
+        this.direction = direction;
     }
 
     public Action TakeTurn()
@@ -22,7 +24,7 @@ public class PatternAI : BaseMonsterAI, BaseAI
             return null;
         }
 
-        return new MoveAction(pattern.Peek(), this, false);
+        return new MoveAction(direction, this, true);
     }
 
     public void OnActionResultNotification(ActionResultNotification notification)
@@ -30,17 +32,11 @@ public class PatternAI : BaseMonsterAI, BaseAI
         if (notification.AI == this)
         {
             BaseOnActionResultNotification(notification);
-            if (notification.Result.Type == ActionResultType.SUCCESS ||
-                notification.Result.Type == ActionResultType.FAILURE)
-            {
-                pattern.Enqueue(pattern.Dequeue());
-            }
         }
     }
 
-    ~PatternAI()
+    ~ProjectileAI()
     {
         NotificationCenter.RemoveListener<ActionResultNotification>(OnActionResultNotification);
     }
-
 }

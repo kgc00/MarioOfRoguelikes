@@ -4,12 +4,13 @@ using UnityEngine;
 public class TileType : ScriptableObject
 {
     public Sprite Image;
-    public bool IsWalkable;
+    public bool IsWalkable = true;
 
     public TriggerTypes TriggerType;
     public EnergyRefillTriggerData energyRefillTriggerData;
     public SpikeTrapTriggerData spikeTrapTriggerData;
     public SwitchTriggerData switchTriggerData;
+    public ArrowTrapTriggerData arrowTrapTriggerData;
     public TileBehaviour Prefab;
 
     public enum TriggerTypes
@@ -19,5 +20,6 @@ public class TileType : ScriptableObject
         GOAL,
         SPIKE_TRAP,
         SWITCH,
+        ARROW_TRAP
     }
 }

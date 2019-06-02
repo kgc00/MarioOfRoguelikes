@@ -45,11 +45,30 @@ public class Board
             BoardHelper.DeleteTileAt(p, ref tiles);
 
         Tile tile = BoardHelper.CreateTile(
-            Container.transform, this, tileType.Prefab, p, tileType
+            Container.transform, this, p, tileType
         );
 
         // Put tile in the dictionary
         tiles.Add(tile.Position, tile);
+
+        if (tile.Trigger != null)
+        {
+            tile.Trigger.StartTimer(this, tile);
+        }
+    }
+
+    public void PlaceUnit(Vector2Int p, UnitType unitType)
+    {
+        if (units.ContainsKey(p))
+            BoardHelper.DeleteUnitAt(p, ref units);
+
+        Unit unit = BoardHelper.CreateUnit(
+            Container.transform,
+            this,
+            p,
+            unitType);
+
+        units.Add(unit.Position, unit);
     }
 
     public Tile TileAt(Vector2Int pos)
@@ -99,11 +118,7 @@ public class Board
 
         foreach (TileSpawnData data in Container.levelData.tiles)
         {
-            Tile tile = BoardHelper.CreateTile(
-                Container.transform, this, data.tileType.Prefab,
-                data.location, data.tileType);
-
-            tiles.Add(tile.Position, tile);
+            PlaceTile(data.location, data.tileType);
         }
 
         foreach (UnitSpawnData data in Container.levelData.units)
@@ -120,7 +135,6 @@ public class Board
     {
         // TODO: probably exit here for PAUSING
 
-        // make all the units to their things
         List<Unit> unitsCopy = new List<Unit>(units.Values);
         foreach (Unit unit in unitsCopy)
         {
@@ -129,6 +143,7 @@ public class Board
                 unit.Tick();
             }
         }
+
 
         foreach (LateTriggerData call in lateTriggers)
         {
@@ -139,15 +154,7 @@ public class Board
 
         }
 
-        if (lateTriggers.Count > 0)
-        {
-            lateTriggers.Clear();
-        }
-
-        if (deletedUnits.Count > 0)
-        {
-            deletedUnits.Clear();
-        }
-
+        lateTriggers.Clear();
+        deletedUnits.Clear();
     }
 }
