@@ -12,7 +12,7 @@ public class BoardCreator : MonoBehaviour
     public Vector2Int MarkerPosition { get; private set; }
     Transform marker;
     string fileName = "boardcreator";
-    public EditorInputHandler inputHandler;
+    public EditorInputHandler InputHandler;
     [HideInInspector] public List<UnitType> UnitTypes = new List<UnitType>();
     [HideInInspector] public List<TileType> TileTypes = new List<TileType>();
     public int SelectedTileTypeIndex { get; private set; }
