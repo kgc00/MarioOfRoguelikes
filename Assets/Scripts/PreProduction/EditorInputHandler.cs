@@ -33,6 +33,23 @@ public class EditorInputHandler : MonoBehaviour
         {
             boardCreator.MoveAndUpdateMarker(new Vector2Int(1, 0));
         }
+        // function calls
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            boardCreator.PlaceSelectedUnit(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            boardCreator.DeleteUnitAt(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            boardCreator.PlaceSelectedTile(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            boardCreator.DeleteTileAt(boardCreator.MarkerPosition);
+        }
 
     }
 
