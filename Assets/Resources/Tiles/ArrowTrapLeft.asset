@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4c91ce72a508b44b357df30f13ed4b, type: 3}
-  m_Name: ArrowTrapDown
+  m_Name: ArrowTrapLeft
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 324259475a30b3d4683be031ca9a5fa5, type: 3}
+  Image: {fileID: 21300000, guid: 21e2fcc813dd7514a874cab7f3a7d901, type: 3}
   IsWalkable: 1
   TriggerType: 5
   energyRefillTriggerData:
@@ -28,8 +28,8 @@ MonoBehaviour:
     Open: {fileID: 0}
   arrowTrapTriggerData:
     Direction:
-      x: 0
-      y: -1
+      x: -1
+      y: 0
     Rate: 2
     Arrow: {fileID: 11400000, guid: 1c416bf736c5f9949b0a120b36d2d897, type: 2}
   Prefab: {fileID: 5270496987601561066, guid: 0c50922f600c981489e7dc1f991b6193, type: 3}
