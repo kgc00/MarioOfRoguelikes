@@ -39,5 +39,4 @@ public class MoveAction : Action
 
         return success();
     }
-
 }

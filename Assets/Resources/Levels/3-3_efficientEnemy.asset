@@ -216,7 +216,7 @@ MonoBehaviour:
   - location:
       x: 1
       y: 5
-    tileType: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+    tileType: {fileID: 11400000, guid: 31d68ce6e5493b943b3bf7ae5f7adf2b, type: 2}
   - location:
       x: 1
       y: 4
@@ -248,7 +248,7 @@ MonoBehaviour:
   - location:
       x: 0
       y: 5
-    tileType: {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
+    tileType: {fileID: 11400000, guid: 31d68ce6e5493b943b3bf7ae5f7adf2b, type: 2}
   - location:
       x: 0
       y: 4

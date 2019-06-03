@@ -24,6 +24,11 @@ public class HeroAI : BaseAI
         {
             return new MoveAction(new Vector2Int(1, 0), this, false);
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.Instance.Reload();
+            return new MoveAction(new Vector2Int(0, 0), this, false);
+        }
 
         return null;
     }

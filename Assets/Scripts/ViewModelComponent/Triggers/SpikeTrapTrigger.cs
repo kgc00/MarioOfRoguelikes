@@ -38,9 +38,14 @@ public class SpikeTrapTrigger : BaseTrigger
 
     public void OnLeave(Unit unit, Tile tile)
     {
-        tile.Board.PlaceTile(tile.Position, groundTile);
-        CoroutineHelper.Instance.Stop(routine);
-        routine = null;
+        // handling case where unit spawns on tile
+        if (routine != null)
+        {
+            tile.Board.PlaceTile(tile.Position, groundTile);
+            CoroutineHelper.Instance.Stop(routine);
+            routine = null;
+        }
+
     }
     public void StartTimer(Board board, Tile tile) { }
 }

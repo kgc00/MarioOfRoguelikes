@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroEnergyText: {fileID: 1800118331}
---- !u!1001 &1619931390
+--- !u!1001 &1450161252
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e4dae5ff66bd4469fea30ff59a42f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 11400000, guid: 1257a16a2f4384e4cb9cbbc6516b22e3, type: 2}
+  levelData: {fileID: 11400000, guid: af473e40903cff841b2bb6b2cbfbaf81, type: 2}
 --- !u!1001 &8665883714198058755
 PrefabInstance:
   m_ObjectHideFlags: 0

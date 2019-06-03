@@ -522,3 +522,7 @@ MonoBehaviour:
       x: 9
       y: 7
     unitType: {fileID: 11400000, guid: 1df566011ccfd3941b738a1c6f244ce2, type: 2}
+  - location:
+      x: 5
+      y: 2
+    unitType: {fileID: 11400000, guid: 2952978823cdb614c9dd530599b863a7, type: 2}
