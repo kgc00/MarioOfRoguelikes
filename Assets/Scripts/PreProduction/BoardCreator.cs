@@ -11,7 +11,8 @@ public class BoardCreator : MonoBehaviour
     [SerializeField] GameObject tileSelectionIndicatorPrefab;
     public Vector2Int MarkerPosition { get; private set; }
     Transform marker;
-    EditorInputHandler inputHandler;
+    string fileName = "boardcreator";
+    public EditorInputHandler InputHandler;
     [HideInInspector] public List<UnitType> UnitTypes = new List<UnitType>();
     [HideInInspector] public List<TileType> TileTypes = new List<TileType>();
     public int SelectedTileTypeIndex { get; private set; }
@@ -30,8 +31,16 @@ public class BoardCreator : MonoBehaviour
             tileSelectionIndicatorPrefab, transform
         ) as GameObject;
         marker = instance.transform;
-        inputHandler = gameObject.AddComponent<EditorInputHandler>();
-        inputHandler.Initialize(this);
+        InputHandler = gameObject.AddComponent<EditorInputHandler>();
+        InputHandler.Initialize(this);
+    }
+
+    public void SetFileName(string s)
+    {
+        if (s != null && s.Length > 0)
+        {
+            fileName = s;
+        }
     }
 
     public void FillBoard()
@@ -158,10 +167,10 @@ public class BoardCreator : MonoBehaviour
             board.units.Add(new UnitSpawnData(
                 element.Key, element.Value.Type));
 
-        string fileName = string.Format(
+        string fileURI = string.Format(
             "Assets/Resources/Levels/{1}.asset",
-            filePath, name);
-        AssetDatabase.CreateAsset(board, fileName);
+            filePath, fileName);
+        AssetDatabase.CreateAsset(board, fileURI);
     }
     void CreateSaveDirectory()
     {

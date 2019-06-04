@@ -17,6 +17,19 @@ MonoBehaviour:
   TriggerType: 1
   energyRefillTriggerData:
     Uses: 1
-    RefreshTime: 3
-    RefillAmount: 3
+    RefreshTime: 4
+    RefillAmount: 4
+  spikeTrapTriggerData:
+    TriggerTimer: 0
+    GroundTile: {fileID: 0}
+    SpikeTile: {fileID: 0}
+  switchTriggerData:
+    Closed: {fileID: 0}
+    Open: {fileID: 0}
+  arrowTrapTriggerData:
+    Direction:
+      x: 0
+      y: 0
+    Rate: 0
+    Arrow: {fileID: 0}
   Prefab: {fileID: 5270496987601561066, guid: 0c50922f600c981489e7dc1f991b6193, type: 3}

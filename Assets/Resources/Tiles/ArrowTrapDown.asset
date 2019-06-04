@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4c91ce72a508b44b357df30f13ed4b, type: 3}
   m_Name: ArrowTrapDown
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   Image: {fileID: 21300000, guid: 54c21e9eafe9c30448adbe3fa25dc424, type: 3}
+=======
+  Image: {fileID: 21300000, guid: 324259475a30b3d4683be031ca9a5fa5, type: 3}
+>>>>>>> new_levels
   IsWalkable: 1
   TriggerType: 5
   energyRefillTriggerData:
@@ -21,6 +25,11 @@ MonoBehaviour:
     RefillAmount: 0
   spikeTrapTriggerData:
     TriggerTimer: 0
+<<<<<<< HEAD
+=======
+    GroundTile: {fileID: 0}
+    SpikeTile: {fileID: 0}
+>>>>>>> new_levels
   switchTriggerData:
     Closed: {fileID: 0}
     Open: {fileID: 0}

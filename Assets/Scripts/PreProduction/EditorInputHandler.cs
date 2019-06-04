@@ -3,6 +3,7 @@ using UnityEngine;
 public class EditorInputHandler : MonoBehaviour
 {
     BoardCreator boardCreator;
+
     public void Initialize(BoardCreator _boardCreator)
     {
         this.boardCreator = _boardCreator;
@@ -18,6 +19,7 @@ public class EditorInputHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             boardCreator.MoveAndUpdateMarker(new Vector2Int(0, 1));
+            // onKeyPress();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
@@ -30,6 +32,23 @@ public class EditorInputHandler : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
         {
             boardCreator.MoveAndUpdateMarker(new Vector2Int(1, 0));
+        }
+        // function calls
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            boardCreator.PlaceSelectedUnit(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            boardCreator.DeleteUnitAt(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            boardCreator.PlaceSelectedTile(boardCreator.MarkerPosition);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            boardCreator.DeleteTileAt(boardCreator.MarkerPosition);
         }
 
     }

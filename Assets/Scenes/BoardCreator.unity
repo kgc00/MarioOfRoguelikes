@@ -238,18 +238,29 @@ MonoBehaviour:
     type: 3}
   tileSelectionIndicatorPrefab: {fileID: 137804177371799968, guid: eb7b1df601c8f8447b837535d25d4638,
     type: 3}
+  InputHandler: {fileID: 0}
   UnitTypes:
+  - {fileID: 11400000, guid: 1c416bf736c5f9949b0a120b36d2d897, type: 2}
   - {fileID: 11400000, guid: 423ce70f25b529c47bc6708e7c8de3cd, type: 2}
   - {fileID: 11400000, guid: 1df566011ccfd3941b738a1c6f244ce2, type: 2}
-  - {fileID: 11400000, guid: 8ec57f8a298b6914b9e638e8b8c4a819, type: 2}
+  - {fileID: 11400000, guid: 2952978823cdb614c9dd530599b863a7, type: 2}
   TileTypes:
+  - {fileID: 11400000, guid: c7bd1041057d02f44bf3ee8565f87dde, type: 2}
+  - {fileID: 11400000, guid: ae2bd3efc0e3de949964fb4449ea7e03, type: 2}
+  - {fileID: 11400000, guid: bf8aead907a5b4642886973f26451452, type: 2}
+  - {fileID: 11400000, guid: a783feced1dc0474589ba754243e6e8f, type: 2}
+  - {fileID: 11400000, guid: 31d68ce6e5493b943b3bf7ae5f7adf2b, type: 2}
   - {fileID: 11400000, guid: 1f14b82e7dd343a46a8f0c4031e8c5e8, type: 2}
   - {fileID: 11400000, guid: 000e7d2e53a60294cb9046fd1dbe51c9, type: 2}
   - {fileID: 11400000, guid: 1a52cff681ac1ea48b576c1177c76f81, type: 2}
-  - {fileID: 11400000, guid: 54b1438f405e7a9418550ff03d6c0d5d, type: 2}
+  - {fileID: 11400000, guid: 8b87b6f8d5605dc4ba1fd9acd3b17eac, type: 2}
+  - {fileID: 11400000, guid: edb8e3afcc1f63c4d966bb499b2cab3a, type: 2}
+  - {fileID: 11400000, guid: 17e3fe01370660e4bbb6c214cbc86a54, type: 2}
+  - {fileID: 11400000, guid: 91312ba64f3267048ad47e0d14514845, type: 2}
+  - {fileID: 11400000, guid: 87aa47615ef9fed4ca1b91b6b52a8466, type: 2}
   width: 10
   depth: 10
-  levelData: {fileID: 0}
+  levelData: {fileID: 11400000, guid: 4faa8be68a2ea7a408ba89f3c43dee73, type: 2}
 --- !u!4 &265394844
 Transform:
   m_ObjectHideFlags: 0
