@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f86db44032c014aaa4b58093d8d3a6, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  Image: {fileID: 21300000, guid: 31547caccf3fcbe4296a3661c2ec722b, type: 3}
-=======
   Image: {fileID: 21300000, guid: 5be31926968908f4f81ec6de13ec0870, type: 3}
->>>>>>> new_levels
   AI: 2
   PatternAIData:
     Pattern: {fileID: 0}
