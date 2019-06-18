@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardBehaviour : MonoBehaviour {
+public class BoardBehaviour : MonoBehaviour
+{
 
     private Board board;
-    public LevelData levelData;
+    public LevelData LevelData;
 
-    private void Awake () {
-        board = new Board ();
+    private void Awake()
+    {
+        board = new Board();
         board.Container = this;
-        board.Load ();
+        board.Load();
+        Camera.main.gameObject.AddComponent<CameraZoom>().CenterAndZoom();
     }
 
-    private void Update () {
-        board.Tick ();
+    private void Update()
+    {
+        board.Tick();
     }
 }

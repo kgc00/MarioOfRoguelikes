@@ -4,6 +4,9 @@ class GoalTrigger : BaseTrigger
     {
         if (unit.AI.IsHero())
         {
+            unit.energy.Add(4);
+            unit.Behaviour.MatchSizeToEnergy(unit.energy.Current / unit.energy.Max);
+            unit.ClearStuff();
             GameManager.Instance.NextLevel();
         }
     }

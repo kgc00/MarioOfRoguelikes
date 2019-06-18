@@ -19,6 +19,14 @@ public class SpikeTrapTrigger : BaseTrigger
         this.spikeTile = data.SpikeTile;
         this.groundTile = data.GroundTile;
     }
+    ~SpikeTrapTrigger()
+    {
+        if (routine != null)
+        {
+            CoroutineHelper.Instance.Stop(routine);
+            routine = null;
+        }
+    }
 
     void TriggerTrap(Unit unit, Tile tile)
     {

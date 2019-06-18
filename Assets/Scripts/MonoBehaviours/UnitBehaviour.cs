@@ -23,4 +23,9 @@ public class UnitBehaviour : MonoBehaviour
         spriteRenderer.sprite = sprite;
     }
 
+    public void MatchSizeToEnergy(float normalizedSize)
+    {
+        spriteRenderer.GetComponentInParent<Transform>()
+        .localScale = new Vector3(normalizedSize, normalizedSize, normalizedSize);
+    }
 }

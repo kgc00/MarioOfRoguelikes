@@ -20,6 +20,7 @@ public class CoroutineHelper : MonoBehaviour
 
     public void Stop(Coroutine routine)
     {
+        Debug.Log("stopping");
         StopCoroutine(routine);
     }
 

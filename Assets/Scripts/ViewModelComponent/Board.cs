@@ -113,15 +113,18 @@ public class Board
 
     public void Load()
     {
-        if (Container.levelData == null)
-            return;
 
-        foreach (TileSpawnData data in Container.levelData.tiles)
+
+
+        if (Container.LevelData == null)
+            Container.LevelData = GameManager.Instance.SetCurrentLevel();
+
+        foreach (TileSpawnData data in Container.LevelData.tiles)
         {
             PlaceTile(data.location, data.tileType);
         }
 
-        foreach (UnitSpawnData data in Container.levelData.units)
+        foreach (UnitSpawnData data in Container.LevelData.units)
         {
             Unit unit = BoardHelper.CreateUnit(
                 Container.transform, this,
