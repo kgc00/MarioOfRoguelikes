@@ -2,8 +2,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Unit
-{
+public class Unit {
     public UnitBehaviour Behaviour { get; protected set; }
     public UnitType Type { get; protected set; }
     public BaseAI AI { get; protected set; }
@@ -13,8 +12,7 @@ public class Unit
     private bool isDying;
     Coroutine routine;
 
-    public Unit(Board board, UnitBehaviour unitBehaviour, UnitType type, BaseAI ai, Vector2Int position)
-    {
+    public Unit (Board board, UnitBehaviour unitBehaviour, UnitType type, BaseAI ai, Vector2Int position) {
         Board = board;
         Behaviour = unitBehaviour;
         Type = type;
@@ -23,9 +21,9 @@ public class Unit
         isDying = false;
 
         // TODO: refactor into Stats system
-        energy = type.energyInitializer != null
-            ? new Energy(type.energyInitializer)
-            : new Energy();
+        energy = type.energyInitializer != null ?
+            new Energy (type.energyInitializer) :
+            new Energy ();
     }
 
     // ~Unit()
@@ -36,93 +34,79 @@ public class Unit
     //     }
     // }
 
-    public void ClearStuff()
-    {
-        if (routine != null)
-        {
-            CoroutineHelper.Instance.Stop(routine);
+    public void ClearStuff () {
+        if (routine != null) {
+            CoroutineHelper.Instance.Stop (routine);
         }
     }
 
-    public void Tick()
-    {
+    public void Tick () {
 
         // TODO: Refactor into stat system
-        energy.Tick();
+        energy.Tick ();
 
-        TakeAction();
+        TakeAction ();
 
-        NotificationCenter.FireEvent<StatChange>(new StatChange(this, typeof(Energy), energy.Bars));
-        Render();
-        CheckHeroOutOfEnergy();
+        NotificationCenter.FireEvent<StatChange> (new StatChange (this, typeof (Energy), energy.Bars));
+        Render ();
+        CheckHeroOutOfEnergy ();
     }
 
-    private void CheckHeroOutOfEnergy()
-    {
-        if (AI.IsHero() && isDying && energy.Current > 0)
-        {
+    private void CheckHeroOutOfEnergy () {
+        if (AI.IsHero () && isDying && energy.Current > 0) {
             // stop death
-            CoroutineHelper.Instance.Stop(routine);
+            CoroutineHelper.Instance.Stop (routine);
             isDying = false;
         }
 
-        if (AI.IsHero() && energy.Current == 0 && !isDying)
-        {
+        if (AI.IsHero () && energy.Current == 0 && !isDying) {
             // QueueDeath
-            routine = CoroutineHelper.Instance.Countdown(.5f, .1f, () => OnDeath());
+            routine = CoroutineHelper.Instance.Countdown (.5f, .1f, () => OnDeath ());
             isDying = true;
         }
     }
 
-    private void TakeAction()
-    {
-        if (AI == null)
-        {
+    private void TakeAction () {
+        if (AI == null) {
             return;
         }
 
-        Action action = AI.TakeTurn();
+        Action action = AI.TakeTurn ();
 
-        if (action != null && action.Cost <= energy.Bars)
-        {
+        if (action != null && action.Cost <= energy.Bars) {
             ActionResult result;
-            do
-            {
-                result = action.Perform(this);
-                if (result.Type == ActionResultType.ALTERNATE)
-                {
+            do {
+                result = action.Perform (this);
+                if (result.Type == ActionResultType.ALTERNATE) {
                     action = result.AlternateAction;
                 }
             } while (result.Type == ActionResultType.ALTERNATE);
 
-            if (result.Type == ActionResultType.SUCCESS)
-            {
+            if (result.Type == ActionResultType.SUCCESS) {
 
-                energy.Spend(action.Cost);
+                energy.Spend (action.Cost);
             }
         }
     }
 
-    private void Render()
-    {
-        Behaviour.UpdatePosition(Position);
-        Behaviour.UpdateSprite(Type.Image);
-        Behaviour.MatchSizeToEnergy(energy.Current / energy.Max);
+    private void Render () {
+        Behaviour.UpdatePosition (Position);
+        Behaviour.UpdateSprite (Type.Image);
+        if (this.AI is HeroAI) {
+            Behaviour.MatchSizeToEnergy (UnityEngine.Mathf.Lerp (0.5f, 1, (energy.Current / energy.Max)));
+        }
     }
 
-    protected virtual Action TakeTurn() { return null; }
+    protected virtual Action TakeTurn () { return null; }
 
-    public virtual void OnDeath()
-    {
-        if (AI.IsHero())
-        {
-            Tile tile = Board.TileAt(Position);
-            if (tile.Trigger != null)
-            {
-                tile.Trigger.OnLeave(this, tile);
+    public virtual void OnDeath () {
+        if (AI.IsHero ()) {
+            Tile tile = Board.TileAt (Position);
+            if (tile.Trigger != null) {
+                tile.Trigger.OnLeave (this, tile);
             }
-            GameManager.Instance.Reload();
+            GameManager.Instance.Reload ();
         }
-        Object.Destroy(this.Behaviour.gameObject);
+        Object.Destroy (this.Behaviour.gameObject);
     }
 }

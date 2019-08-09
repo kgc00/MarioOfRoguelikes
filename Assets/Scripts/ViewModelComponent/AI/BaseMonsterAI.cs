@@ -1,11 +1,8 @@
 using UnityEngine;
-public abstract class BaseMonsterAI
-{
+public abstract class BaseMonsterAI {
     // TODO: make moveDelay configurable
-    protected bool MustWait
-    {
-        get
-        {
+    protected bool MustWait {
+        get {
             return mustWait;
         }
     }
@@ -13,30 +10,26 @@ public abstract class BaseMonsterAI
     private bool mustWait = false;
     private Coroutine routine;
 
-    public bool IsHero()
-    {
+    public bool IsHero () {
         return false;
     }
 
-    private void OnCooldownDone()
-    {
+    private void OnCooldownDone () {
         mustWait = false;
     }
 
-    protected void BaseOnActionResultNotification(ActionResultNotification notification)
-    {
-        if (notification.Result.Type == ActionResultType.SUCCESS)
-        {
+    protected void BaseOnActionResultNotification (ActionResultNotification notification) {
+        if (notification.Result.Type == ActionResultType.SUCCESS) {
             mustWait = true;
-            routine = CoroutineHelper.Instance.Countdown(moveDelay, .05f, OnCooldownDone);
+            routine = CoroutineHelper.Instance.Countdown (moveDelay, .05f, OnCooldownDone);
         }
     }
 
-    ~BaseMonsterAI()
-    {
-        if (routine != null)
-        {
-            CoroutineHelper.Instance.Stop(routine);
-        }
-    }
+    // ~BaseMonsterAI()
+    // {
+    //     if (routine != null)
+    //     {
+    //         CoroutineHelper.Instance.Stop(routine);
+    //     }
+    // }
 }
